@@ -1,0 +1,11 @@
+{
+  "id": 50100,
+  "name": "MYAPP ADMIN",
+  "caption": "My App Admin",
+  "assignable": true,
+  "permissions": [
+    { "type": "tabledata", "name": "Customer", "rights": "RIMD" },
+    { "type": "page", "name": "Customer Card", "rights": "X" },
+    { "type": "codeunit", "name": "Customer Mgt.", "rights": "X" }
+  ]
+}

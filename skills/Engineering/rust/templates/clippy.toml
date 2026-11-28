@@ -1,0 +1,12 @@
+# Example Clippy configuration.
+# Do NOT attempt to enable all `clippy::restriction` lints here.
+# Most lint levels belong in Cargo.toml/[lints] or crate attributes;
+# clippy.toml configures lint behavior/thresholds.
+
+# Keep thresholds conservative and project-specific.
+too-many-arguments-threshold = 7
+type-complexity-threshold = 300
+cognitive-complexity-threshold = 15
+
+# Review these values for your domain rather than treating them as universal.
+avoid-breaking-exported-api = true

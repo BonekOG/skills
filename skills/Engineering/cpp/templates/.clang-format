@@ -1,0 +1,21 @@
+# Baseline C++ formatting. Copy this file to the project root as .clang-format
+# and adjust it to the repository's documented style. A checked-in project
+# configuration always wins over this template.
+BasedOnStyle: Google
+Language: Cpp
+Standard: c++20
+
+# The engineering baseline in this skill uses four-space indentation and a
+# practical 120-column limit. Change both when the project already defines
+# different values; consistency matters more than this particular choice.
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+AccessModifierOffset: -4
+ColumnLimit: 120
+BreakBeforeBraces: Attach
+
+DerivePointerAlignment: false
+PointerAlignment: Left
+SortIncludes: CaseSensitive
+IncludeBlocks: Regroup

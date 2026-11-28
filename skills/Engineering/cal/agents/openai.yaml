@@ -1,0 +1,7 @@
+interface:
+  display_name: "C/AL"
+  short_description: "Dynamics NAV C/AL: Objekte, Datenmigration und Modernisierung"
+  default_prompt: "Use $cal to change, review, or modernize this Dynamics NAV C/AL solution while preserving the export encoding and verifying the compile."
+
+policy:
+  allow_implicit_invocation: true

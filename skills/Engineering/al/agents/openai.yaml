@@ -1,0 +1,7 @@
+interface:
+  display_name: "AL"
+  short_description: "Business Central AL: Erweiterungen, Datenmodell und Upgrades"
+  default_prompt: "Use $al to implement, review, or upgrade this Business Central AL extension against the target symbols, with schema, upgrade, and permission impact stated."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "requires": [
+    "bash",
+    "cargo"
+  ],
+  "detail": "The Rust toolchain must include rustfmt, Clippy, and rustdoc."
+}

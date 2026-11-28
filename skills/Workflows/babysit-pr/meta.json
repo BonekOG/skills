@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "requires": [
+    "bash",
+    "cat",
+    "gh",
+    "git",
+    "jq",
+    "sed"
+  ],
+  "detail": "The GitHub CLI must be authenticated."
+}

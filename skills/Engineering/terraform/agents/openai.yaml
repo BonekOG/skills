@@ -1,0 +1,7 @@
+interface:
+  display_name: "Terraform"
+  short_description: "Terraform-Architektur, Pläne und sichere Infrastruktur-Änderungen"
+  default_prompt: "Use $terraform to design, review, or safely operate this Terraform configuration with explicit state ownership, reviewed plans, and validation evidence."
+
+policy:
+  allow_implicit_invocation: true

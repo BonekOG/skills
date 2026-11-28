@@ -1,0 +1,79 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish tags and GitHub Releases after building
+        required: true
+        type: boolean
+        default: true
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    if: >-
+      github.repository == 'BonekOG/skills' &&
+      (github.event_name == 'workflow_dispatch' || vars.RELEASE_AUTOMATION_ENABLED == 'true')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    concurrency:
+      group: skills-release-main
+      cancel-in-progress: false
+    steps:
+      - name: Check out repository and tags
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Refresh tags
+        run: git fetch --force --tags origin
+
+      - name: Validate skill repository
+        run: python3 scripts/check-format.py
+
+      - name: Validate the pushed version changes
+        if: github.event_name == 'push'
+        env:
+          BASE_SHA: ${{ github.event.before }}
+        run: python3 scripts/release.py check --base "$BASE_SHA"
+
+      - name: Plan release candidates
+        env:
+          PLAN_PATH: ${{ runner.temp }}/release-plan.json
+        run: |
+          python3 scripts/release.py plan --output "$PLAN_PATH" --include-tagged
+
+      - name: Build release assets
+        env:
+          PLAN_PATH: ${{ runner.temp }}/release-plan.json
+        run: |
+          rm -rf dist
+          python3 scripts/release.py build --plan "$PLAN_PATH" --output-dir dist
+          cp "$PLAN_PATH" dist/release-plan.json
+
+      - name: Upload release candidate
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: release-candidate-${{ github.run_id }}-${{ github.run_attempt }}
+          path: dist
+          if-no-files-found: error
+
+      - name: Publish release candidates
+        env:
+          PUBLISH: ${{ github.event_name == 'push' || inputs.publish }}
+          PLAN_PATH: ${{ runner.temp }}/release-plan.json
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "$PUBLISH" != "true" ]; then
+            echo "Publish disabled; release candidate remains an Actions artifact."
+            exit 0
+          fi
+          python3 scripts/release.py publish --plan "$PLAN_PATH" --dist dist

@@ -1,0 +1,24 @@
+# Merge/adapt this into workspace Cargo.toml.
+#
+# [workspace.lints.rust]
+# unsafe_op_in_unsafe_fn = "warn"
+# missing_docs = "warn"              # especially useful for public library crates
+#
+# [workspace.lints.clippy]
+# all = { level = "warn", priority = -1 }
+# pedantic = { level = "warn", priority = -1 }
+#
+# Pedantic is intentionally reviewed project-by-project. Some lints can be noisy.
+# Prefer explicit, documented allows over disabling a whole category.
+#
+# Common candidates to evaluate explicitly:
+# dbg_macro = "deny"
+# todo = "warn"
+# unimplemented = "warn"
+# large_futures = "warn"
+# large_types_passed_by_value = "warn"
+# needless_pass_by_value = "warn"
+# clone_on_ref_ptr = "warn"
+# rc_buffer = "warn"
+#
+# DO NOT enable `clippy::restriction` wholesale.

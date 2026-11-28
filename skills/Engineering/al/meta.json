@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "requires": [
+    "python3"
+  ],
+  "detail": "The bundled permission-set and translation tools use it."
+}

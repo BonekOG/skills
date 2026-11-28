@@ -1,0 +1,7 @@
+interface:
+  display_name: "Kubernetes"
+  short_description: "Kubernetes-gerechte Entwicklung und sichere Operations"
+  default_prompt: "Use $kubernetes to make this application or platform Kubernetes-ready with evidence, focused guidance, validation, and safe live-operation boundaries."
+
+policy:
+  allow_implicit_invocation: true
